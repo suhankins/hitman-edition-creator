@@ -1,0 +1,24 @@
+<button class="add-row-button" data-add-row-button>Add row</button>
+
+<script>
+    import NEW_CELL from './NewCell';
+    import NEW_ROW_HEADER from './NewRowHeader';
+
+    document.querySelectorAll('[data-add-row-button]').forEach((button) => {
+        button.addEventListener('click', () => {
+            const table = document.querySelector(
+                '[data-edition-table]'
+            ) as HTMLTableElement;
+            const tBody = table.tBodies.item(0) as HTMLTableSectionElement;
+            const lastRow = tBody.rows.item(tBody.rows.length - 1);
+            const newRow = tBody.insertRow();
+            const heading = document.createElement('th');
+            heading.innerHTML = NEW_ROW_HEADER;
+            newRow.appendChild(heading);
+            for (let i = 1; i < (lastRow?.children.length ?? 0); i++) {
+                const cell = newRow.insertCell();
+                cell.innerHTML = NEW_CELL;
+            }
+        });
+    });
+</script>

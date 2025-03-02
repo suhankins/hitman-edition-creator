@@ -1,0 +1,202 @@
+---
+import ComparisonGridHeader from "./ComparisonGridHeader.astro";
+---
+
+<div class="background">
+    <table class="table" data-edition-table>
+        <thead>
+            <tr>
+                <td>
+                    <ComparisonGridHeader />
+                </td>
+                <th>
+                    <label class="edition-cover">
+                        <input
+                            class="edition-cover-selector"
+                            oninput="selectCover(this)"
+                            type="file"
+                            accept="image/*"
+                        />
+                    </label>
+                    <p contenteditable>Skibidi Edition</p>
+                </th>
+                <th>
+                    <label class="edition-cover">
+                        <input
+                            class="edition-cover-selector"
+                            oninput="selectCover(this)"
+                            type="file"
+                            accept="image/*"
+                        />
+                    </label>
+                    <p contenteditable>Skibidi Edition</p>
+                </th>
+                <th>
+                    <label class="edition-cover">
+                        <input
+                            class="edition-cover-selector"
+                            oninput="selectCover(this)"
+                            type="file"
+                            accept="image/*"
+                        />
+                    </label>
+                    <p contenteditable>Skibidi Edition</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th><span contenteditable>ICA Training Thing</span></th>
+                <td>
+                    <label>
+                        <div class="content">
+                            <img src="/arrow.svg" alt="" /> Included
+                            <input type="checkbox" />
+                        </div>
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <div class="content">
+                            <img src="/arrow.svg" alt="" /> Included
+                            <input type="checkbox" />
+                        </div>
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <div class="content">
+                            <img src="/arrow.svg" alt="" /> Included
+                            <input type="checkbox" />
+                        </div>
+                    </label>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script is:inline>
+    function selectCover(element) {
+        const newImageUrl = window.URL.createObjectURL(element.files[0]);
+        const oldImageUrl = element.parentElement.style.backgroundImage.slice(
+            5,
+            -2
+        );
+        if (oldImageUrl.startsWith('blob:')) {
+            window.URL.revokeObjectURL(oldImageUrl);
+        }
+        element.parentElement.style.backgroundImage = `url("${newImageUrl}")`;
+        element.dataset.imageApplied = true;
+    }
+</script>
+
+<style is:global>
+    .table {
+        border-collapse: separate;
+        border-spacing: 1px 4px;
+    }
+
+    .background {
+        background-image: url('/background.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: fit-content;
+        padding: 5px;
+    }
+
+    .edition-cover {
+        display: flex;
+        width: 100%;
+        height: 22ch;
+        justify-content: center;
+        background-size: cover;
+        align-items: center;
+        background-position: center;
+    }
+
+    .edition-cover-selector {
+        color: transparent;
+        width: 9ch;
+    }
+
+    .edition-cover .edition-cover-selector[data-image-applied] {
+        visibility: hidden;
+    }
+
+    .edition-cover:hover .edition-cover-selector[data-image-applied] {
+        visibility: visible;
+    }
+
+    .table th {
+        text-transform: uppercase;
+    }
+
+    .table thead th {
+        background-color: white;
+        color: #2c2c2c;
+        padding-left: 2px;
+        padding-right: 2px;
+        padding-top: 2px;
+        padding-bottom: 0.25em;
+        min-width: 16ch;
+        width: 16ch;
+        max-width: 16ch;
+        vertical-align: top;
+    }
+
+    .table thead th p {
+        margin: 0;
+    }
+
+    .table tbody th,
+    .table tbody td {
+        background-color: #2f414588;
+        height: 2.5em;
+    }
+
+    .table tbody td:has(input:checked) {
+        background-color: #f8021b;
+        text-align: center;
+    }
+
+    .table tbody td label {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+    }
+
+    .table tbody td label .content {
+        visibility: hidden;
+    }
+
+    .table tbody td:has(input:checked) label .content {
+        visibility: visible;
+    }
+
+    .table tbody td input[type='checkbox'] {
+        display: none;
+    }
+
+    .table tbody th {
+        color: #d0d3d6;
+        padding-left: 2ch;
+        position: relative;
+        padding-right: 1ch;
+        text-align: right;
+    }
+
+    .table tbody th::after {
+        content: '';
+        position: absolute;
+        right: -1px;
+        top: 0;
+        width: 1px;
+        background-color: #2f414588;
+        height: 100%;
+    }
+</style>

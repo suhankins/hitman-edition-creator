@@ -1,0 +1,24 @@
+<button class="add-column-button" data-add-column-button>Add Column</button>
+
+<script>
+    import NEW_CELL from './NewCell';
+    import NEW_COLUMN_HEADER from './NewColumnHeader';
+
+    document.querySelectorAll('[data-add-column-button]').forEach((button) => {
+        button.addEventListener('click', () => {
+            const table = document.querySelector(
+                '[data-edition-table]'
+            ) as HTMLTableElement;
+            const heading = document.createElement('th');
+            heading.innerHTML = NEW_COLUMN_HEADER;
+            table.tHead!.rows.item(0)?.appendChild(heading);
+
+            const tBody = table.tBodies.item(0) as HTMLTableSectionElement;
+            for (let i = 0; i < tBody.rows.length; i++) {
+                const row = tBody.rows.item(i) as HTMLTableRowElement;
+                const cell = row.insertCell();
+                cell.innerHTML = NEW_CELL;
+            }
+        });
+    });
+</script>
