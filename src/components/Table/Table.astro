@@ -235,12 +235,23 @@ import DEFAULT_STATE from './DefaultTableState';
         border-radius: 0;
     }
 
-    .included-button:not([aria-pressed='true']) {
+    .included-button[aria-pressed='false'] {
+        background: none;
+        color: transparent;
+    }
+
+    .included-button[aria-pressed='false'] > * {
         opacity: 0;
     }
 
-    .included-button:not([aria-pressed='true']):hover {
+    .included-button[aria-pressed='false']:hover {
+        background-color: #f8021b;
+        color: inherit;
         opacity: 0.5;
+    }
+
+    .included-button[aria-pressed='false']:hover > * {
+        opacity: 1;
     }
 
     .included-button > img {
