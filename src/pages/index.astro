@@ -7,20 +7,30 @@ import Layout from '../layouts/Layout.astro';
 <Layout>
     <div class="container">
         <h1>HITMAN Edition Creator</h1>
-        <p>You think IOI's "Comparison Grid" isn't absurd enough? Then show 'em how it's done!</p>
+        <p>
+            You think IOI's "Comparison Grid" isn't absurd enough? Then show 'em
+            how it's done!
+        </p>
         <Table />
-		<br />
+        <br />
+        <TakeScreenshotButton />
         <footer>
-            <TakeScreenshotButton />
+            <p>
+                This website on <a
+                    href="https://github.com/suhankins/hitman-edition-creator"
+                    >GitHub</a
+                >. Made by Punished Bernadetta. This project is not affiliated
+                with IO Interactive.
+            </p>
         </footer>
     </div>
 </Layout>
 
 <style>
-	.container {
+    .container {
         margin-left: auto;
         margin-right: auto;
-		width: fit-content;
-		text-align: center;
-	}
+        width: fit-content;
+        text-align: center;
+    }
 </style>
