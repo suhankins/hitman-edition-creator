@@ -1,5 +1,6 @@
 ---
-import ComparisonGridHeader from "./ComparisonGridHeader.astro";
+import AddRowButton from './AddRowButton.astro';
+import ComparisonGridHeader from './ComparisonGridHeader.astro';
 ---
 
 <div class="background">
@@ -9,7 +10,7 @@ import ComparisonGridHeader from "./ComparisonGridHeader.astro";
                 <td>
                     <ComparisonGridHeader />
                 </td>
-                <th>
+                <th data-table-column="1">
                     <label class="edition-cover">
                         <input
                             class="edition-cover-selector"
@@ -18,9 +19,9 @@ import ComparisonGridHeader from "./ComparisonGridHeader.astro";
                             accept="image/*"
                         />
                     </label>
-                    <p contenteditable>Skibidi Edition</p>
+                    <p contenteditable>Standard Edition</p>
                 </th>
-                <th>
+                <th data-table-column="2">
                     <label class="edition-cover">
                         <input
                             class="edition-cover-selector"
@@ -29,9 +30,9 @@ import ComparisonGridHeader from "./ComparisonGridHeader.astro";
                             accept="image/*"
                         />
                     </label>
-                    <p contenteditable>Skibidi Edition</p>
+                    <p contenteditable>Standard Edition</p>
                 </th>
-                <th>
+                <th data-table-column="3">
                     <label class="edition-cover">
                         <input
                             class="edition-cover-selector"
@@ -40,14 +41,14 @@ import ComparisonGridHeader from "./ComparisonGridHeader.astro";
                             accept="image/*"
                         />
                     </label>
-                    <p contenteditable>Skibidi Edition</p>
+                    <p contenteditable>Standard Edition</p>
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th><p contenteditable>ICA Training Thing</p></th>
-                <td>
+                <td data-table-column="1">
                     <label>
                         <div class="content">
                             <img src="/arrow.svg" alt="" /> Included
@@ -55,7 +56,7 @@ import ComparisonGridHeader from "./ComparisonGridHeader.astro";
                         </div>
                     </label>
                 </td>
-                <td>
+                <td data-table-column="2">
                     <label>
                         <div class="content">
                             <img src="/arrow.svg" alt="" /> Included
@@ -63,7 +64,7 @@ import ComparisonGridHeader from "./ComparisonGridHeader.astro";
                         </div>
                     </label>
                 </td>
-                <td>
+                <td data-table-column="3">
                     <label>
                         <div class="content">
                             <img src="/arrow.svg" alt="" /> Included
@@ -73,6 +74,22 @@ import ComparisonGridHeader from "./ComparisonGridHeader.astro";
                 </td>
             </tr>
         </tbody>
+        <tfoot>
+            <tr>
+                <td>
+                    <AddRowButton />
+                </td>
+                <td data-table-column="1">
+                    <button onclick="deleteColumn(this)">Delete column</button>
+                </td>
+                <td data-table-column="2">
+                    <button onclick="deleteColumn(this)">Delete column</button>
+                </td>
+                <td data-table-column="3">
+                    <button onclick="deleteColumn(this)">Delete column</button>
+                </td>
+            </tr>
+        </tfoot>
     </table>
 </div>
 
@@ -88,6 +105,24 @@ import ComparisonGridHeader from "./ComparisonGridHeader.astro";
         }
         element.parentElement.style.backgroundImage = `url("${newImageUrl}")`;
         element.dataset.imageApplied = true;
+    }
+
+    function deleteColumn(deleteButton) {
+        const tableColumn = deleteButton.parentElement.dataset.tableColumn;
+        const parsedTableColumn = parseInt(tableColumn);
+        document
+            .querySelectorAll(
+                `[data-table-column]`
+            )
+            .forEach((element) => {
+                if (element.dataset.tableColumn === tableColumn) {
+                    element.remove();
+                }
+                const elementTableColumn = parseInt(element.dataset.tableColumn);
+                if (elementTableColumn > parsedTableColumn) {
+                    element.dataset.dataColumn = `${parsedTableColumn - 1}`
+                }
+            });
     }
 </script>
 

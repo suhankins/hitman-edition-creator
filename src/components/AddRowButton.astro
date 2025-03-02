@@ -17,6 +17,7 @@
             newRow.appendChild(heading);
             for (let i = 1; i < (lastRow?.children.length ?? 0); i++) {
                 const cell = newRow.insertCell();
+                cell.dataset.tableColumn = `${i}`;
                 cell.innerHTML = NEW_CELL;
             }
         });
