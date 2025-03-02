@@ -1,3 +1,4 @@
-const NEW_ROW_HEADER = `<p contenteditable>ICA Training Facility</p>`;
+const NewRowHeader = (text: string = 'ICA Training Facility') =>
+    `<p contenteditable>${text}</p>`;
 
-export default NEW_ROW_HEADER;
+export default NewRowHeader;

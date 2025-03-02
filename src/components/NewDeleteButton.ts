@@ -1,4 +1,4 @@
-const NEW_DELETE_BUTTON =
+const NewDeleteButton = () =>
     '<button onclick="deleteColumn(this)">Delete column</button>';
 
-export default NEW_DELETE_BUTTON;
+export default NewDeleteButton;

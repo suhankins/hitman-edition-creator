@@ -1,6 +1,10 @@
 ---
 import AddRowButton from './AddRowButton.astro';
 import ComparisonGridHeader from './ComparisonGridHeader.astro';
+import NewCell from './NewCell';
+import NewColumnHeader from './NewColumnHeader';
+import NewDeleteButton from './NewDeleteButton';
+import NewRowHeader from './NewRowHeader';
 ---
 
 <div class="background">
@@ -11,63 +15,29 @@ import ComparisonGridHeader from './ComparisonGridHeader.astro';
                     <ComparisonGridHeader />
                 </td>
                 <th data-table-column="1">
-                    <label class="edition-cover">
-                        <input
-                            class="edition-cover-selector"
-                            oninput="selectCover(this)"
-                            type="file"
-                            accept="image/*"
-                        />
-                    </label>
-                    <p contenteditable>Standard Edition</p>
+                    <Fragment set:html={NewColumnHeader('Free Starter Pack')} />
                 </th>
                 <th data-table-column="2">
-                    <label class="edition-cover">
-                        <input
-                            class="edition-cover-selector"
-                            oninput="selectCover(this)"
-                            type="file"
-                            accept="image/*"
-                        />
-                    </label>
-                    <p contenteditable>Standard Edition</p>
+                    <Fragment set:html={NewColumnHeader('Standard Edition')} />
                 </th>
                 <th data-table-column="3">
-                    <label class="edition-cover">
-                        <input
-                            class="edition-cover-selector"
-                            oninput="selectCover(this)"
-                            type="file"
-                            accept="image/*"
-                        />
-                    </label>
-                    <p contenteditable>Standard Edition</p>
+                    <Fragment set:html={NewColumnHeader('Deluxe Edition')} />
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <th><p contenteditable>ICA Training Thing</p></th>
+                <th>
+                    <Fragment set:html={NewRowHeader('ICA Training Facility')} />
+                </th>
                 <td data-table-column="1">
-                    <button
-                        class="included-button"
-                        onclick="this.ariaPressed = !(this.ariaPressed === 'true')"
-                        >Included</button
-                    >
+                    <Fragment set:html={NewCell()} />
                 </td>
                 <td data-table-column="2">
-                    <button
-                        class="included-button"
-                        onclick="this.ariaPressed = !(this.ariaPressed === 'true')"
-                        >Included</button
-                    >
+                    <Fragment set:html={NewCell(true)} />
                 </td>
                 <td data-table-column="3">
-                    <button
-                        class="included-button"
-                        onclick="this.ariaPressed = !(this.ariaPressed === 'true')"
-                        >Included</button
-                    >
+                    <Fragment set:html={NewCell(true)} />
                 </td>
             </tr>
         </tbody>
@@ -77,13 +47,13 @@ import ComparisonGridHeader from './ComparisonGridHeader.astro';
                     <AddRowButton />
                 </td>
                 <td data-table-column="1">
-                    <button onclick="deleteColumn(this)">Delete column</button>
+                    <Fragment set:html={NewDeleteButton()} />
                 </td>
                 <td data-table-column="2">
-                    <button onclick="deleteColumn(this)">Delete column</button>
+                    <Fragment set:html={NewDeleteButton()} />
                 </td>
                 <td data-table-column="3">
-                    <button onclick="deleteColumn(this)">Delete column</button>
+                    <Fragment set:html={NewDeleteButton()} />
                 </td>
             </tr>
         </tfoot>

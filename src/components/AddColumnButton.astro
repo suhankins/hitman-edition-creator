@@ -1,9 +1,9 @@
 <button class="add-column-button" data-add-column-button>Add Column</button>
 
 <script>
-    import NEW_CELL from './NewCell';
-    import NEW_COLUMN_HEADER from './NewColumnHeader';
-    import NEW_DELETE_BUTTON from './NewDeleteButton';
+    import NewCell from './NewCell';
+    import NewColumnHeader from './NewColumnHeader';
+    import NewDeleteButton from './NewDeleteButton';
 
     document.querySelectorAll('[data-add-column-button]').forEach((button) => {
         button.addEventListener('click', () => {
@@ -14,7 +14,7 @@
 
             const heading = document.createElement('th');
             heading.dataset.tableColumn = `${newColumnIndex}`;
-            heading.innerHTML = NEW_COLUMN_HEADER;
+            heading.innerHTML = NewColumnHeader();
             table.tHead!.rows.item(0)?.appendChild(heading);
 
             const tBody = table.tBodies.item(0) as HTMLTableSectionElement;
@@ -22,11 +22,11 @@
                 const row = tBody.rows.item(i) as HTMLTableRowElement;
                 const cell = row.insertCell();
                 cell.dataset.tableColumn = `${newColumnIndex}`;
-                cell.innerHTML = NEW_CELL;
+                cell.innerHTML = NewCell();
             }
 
             const deleteButtonCell = table.tFoot!.rows.item(0)!.insertCell();
-            deleteButtonCell.innerHTML = NEW_DELETE_BUTTON;
+            deleteButtonCell.innerHTML = NewDeleteButton();
             deleteButtonCell.dataset.tableColumn = `${newColumnIndex}`;
         });
     });

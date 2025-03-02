@@ -1,4 +1,6 @@
-const NEW_COLUMN_HEADER = `<label class="edition-cover">
+const NewColumnHeader = (
+    text: string = 'Standard Edition'
+) => `<label class="edition-cover">
     <input
         class="edition-cover-selector"
         oninput="selectCover(this)"
@@ -6,6 +8,6 @@ const NEW_COLUMN_HEADER = `<label class="edition-cover">
         accept="image/*"
     />
 </label>
-<p contenteditable>Standard edition</p>`;
+<p contenteditable>${text}</p>`;
 
-export default NEW_COLUMN_HEADER;
+export default NewColumnHeader;
