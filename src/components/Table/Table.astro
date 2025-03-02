@@ -7,6 +7,7 @@ import NewColumnHeader from './NewColumnHeader';
 import NewDeleteColumnButton from './NewDeleteColumnButton';
 import NewDeleteRowButton from './NewDeleteRowButton';
 import NewRowHeader from './NewRowHeader';
+import DEFAULT_STATE from './DefaultTableState';
 ---
 
 <div class="background">
@@ -16,89 +17,63 @@ import NewRowHeader from './NewRowHeader';
                 <td>
                     <ComparisonGridHeader />
                 </td>
-                <th data-table-column="1">
-                    <Fragment set:html={NewColumnHeader('Free Starter Pack')} />
-                </th>
-                <th data-table-column="2">
-                    <Fragment set:html={NewColumnHeader('Standard Edition')} />
-                </th>
-                <th data-table-column="3">
-                    <Fragment set:html={NewColumnHeader('Deluxe Edition')} />
-                </th>
+                {
+                    DEFAULT_STATE.editions.map((edition, index) => (
+                        <th data-table-column={index + 1}>
+                            <Fragment
+                                set:html={NewColumnHeader(edition.name)}
+                            />
+                        </th>
+                    ))
+                }
                 <td>
                     <AddColumnButton />
                 </td>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th>
-                    <Fragment
-                        set:html={NewRowHeader('Free Seasonal Content')}
-                    />
-                </th>
-                <td data-table-column="1">
-                    <Fragment set:html={NewCell()} />
-                </td>
-                <td data-table-column="2">
-                    <Fragment set:html={NewCell(true)} />
-                </td>
-                <td data-table-column="3">
-                    <Fragment set:html={NewCell(true)} />
-                </td>
-                <td>
-                    <Fragment set:html={NewDeleteRowButton()} />
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    <Fragment
-                        set:html={NewRowHeader('ICA Training Facility')}
-                    />
-                </th>
-                <td data-table-column="1">
-                    <Fragment set:html={NewCell()} />
-                </td>
-                <td data-table-column="2">
-                    <Fragment set:html={NewCell(true)} />
-                </td>
-                <td data-table-column="3">
-                    <Fragment set:html={NewCell(true)} />
-                </td>
-                <td>
-                    <Fragment set:html={NewDeleteRowButton()} />
-                </td>
-            </tr>
+            {
+                DEFAULT_STATE.content.map((content) => (
+                    <tr>
+                        <th>
+                            <Fragment set:html={NewRowHeader(content.name)} />
+                        </th>
+                        {content.ownership.map((ownership, index) => (
+                            <td data-table-column={index + 1}>
+                                <Fragment set:html={NewCell(ownership)} />
+                            </td>
+                        ))}
+                        <td>
+                            <Fragment set:html={NewDeleteRowButton()} />
+                        </td>
+                    </tr>
+                ))
+            }
+            <tfoot>
+                <tr>
+                    <td>
+                        <AddRowButton />
+                    </td>
+                    {
+                        DEFAULT_STATE.editions.map((_, index) => (
+                            <td data-table-column={index + 1}>
+                                <Fragment set:html={NewDeleteColumnButton()} />
+                            </td>
+                        ))
+                    }
+                    <td>
+                        <div class="table-padding"></div>
+                    </td>
+                </tr>
+            </tfoot>
         </tbody>
-        <tfoot>
-            <tr>
-                <td>
-                    <AddRowButton />
-                </td>
-                <td data-table-column="1">
-                    <Fragment set:html={NewDeleteColumnButton()} />
-                </td>
-                <td data-table-column="2">
-                    <Fragment set:html={NewDeleteColumnButton()} />
-                </td>
-                <td data-table-column="3">
-                    <Fragment set:html={NewDeleteColumnButton()} />
-                </td>
-                <td>
-                    <div class="table-padding" />
-                </td>
-            </tr>
-        </tfoot>
     </table>
 </div>
 
 <script is:inline>
     function selectCover(element) {
         const newImageUrl = window.URL.createObjectURL(element.files[0]);
-        const oldImageUrl = element.previousElementSibling.src.slice(
-            5,
-            -2
-        );
+        const oldImageUrl = element.previousElementSibling.src.slice(5, -2);
         if (oldImageUrl.startsWith('blob:')) {
             window.URL.revokeObjectURL(oldImageUrl);
         }
@@ -187,7 +162,7 @@ import NewRowHeader from './NewRowHeader';
         vertical-align: top;
     }
 
-    .table thead th p { 
+    .table thead th p {
         margin-top: 0.25em;
     }
 
@@ -196,7 +171,8 @@ import NewRowHeader from './NewRowHeader';
         line-height: 1;
     }
 
-    .table th, .table td {
+    .table th,
+    .table td {
         position: relative;
     }
 
@@ -229,7 +205,8 @@ import NewRowHeader from './NewRowHeader';
         border-radius: 0;
     }
 
-    .full-cell-button:hover, .full-cell-button:focus {
+    .full-cell-button:hover,
+    .full-cell-button:focus {
         opacity: 1;
     }
 
