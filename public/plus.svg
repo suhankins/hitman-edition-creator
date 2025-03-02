@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="24px" height="24px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 10.02 10.02"
+viewBox="0 0 10.69 10.69"
  xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
   <style type="text/css">
@@ -9,5 +9,5 @@ viewBox="0 0 10.02 10.02"
    ]]>
   </style>
  </defs>
-  <path class="fil0" d="M1.41 0l7.21 0c0.77,0 1.41,0.63 1.41,1.41l0 7.21c0,0.77 -0.63,1.41 -1.41,1.41l-7.21 0c-0.77,0 -1.41,-0.63 -1.41,-1.41l0 -7.21c0,-0.77 0.63,-1.41 1.41,-1.41zm6.33 3.1l-1.91 1.91 1.91 1.91 -0.82 0.82 -1.91 -1.91 -1.91 1.91 -0.82 -0.82 1.91 -1.91 -1.91 -1.91 0.82 -0.82 1.91 1.91 1.91 -1.91 0.82 0.82z"/>
+  <path class="fil0" d="M1.5 0l7.69 0c0.82,0 1.5,0.67 1.5,1.5l0 7.69c0,0.82 -0.67,1.5 -1.5,1.5l-7.69 0c-0.82,0 -1.5,-0.67 -1.5,-1.5l0 -7.69c0,-0.82 0.67,-1.5 1.5,-1.5zm4.46 1.85l0 2.88 2.88 0 0 1.23 -2.88 0 0 2.88 -1.23 0 0 -2.88 -2.88 0 0 -1.23 2.88 0 0 -2.88 1.23 0z"/>
 </svg>

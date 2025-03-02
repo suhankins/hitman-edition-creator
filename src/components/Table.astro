@@ -1,4 +1,5 @@
 ---
+import AddColumnButton from './AddColumnButton.astro';
 import AddRowButton from './AddRowButton.astro';
 import ComparisonGridHeader from './ComparisonGridHeader.astro';
 import NewCell from './NewCell';
@@ -24,7 +25,9 @@ import NewRowHeader from './NewRowHeader';
                 <th data-table-column="3">
                     <Fragment set:html={NewColumnHeader('Deluxe Edition')} />
                 </th>
-                <td></td>
+                <td>
+                    <AddColumnButton />
+                </td>
             </tr>
         </thead>
         <tbody>
@@ -81,7 +84,9 @@ import NewRowHeader from './NewRowHeader';
                 <td data-table-column="3">
                     <Fragment set:html={NewDeleteColumnButton()} />
                 </td>
-                <td></td>
+                <td>
+                    <div class="table-padding" />
+                </td>
             </tr>
         </tfoot>
     </table>
@@ -182,6 +187,10 @@ import NewRowHeader from './NewRowHeader';
         margin: 0;
     }
 
+    .table th, .table td {
+        position: relative;
+    }
+
     .table tbody th,
     .table tbody td:not(:last-child) {
         background-color: #2f414588;
@@ -190,7 +199,33 @@ import NewRowHeader from './NewRowHeader';
 
     .table tbody td {
         padding: 0;
-        position: relative;
+    }
+
+    .full-cell-button {
+        text-align: center;
+        font-size: inherit;
+        font-family: inherit;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        padding: 5px;
+        background-color: #2f414588;
+        opacity: 0.5;
+    }
+
+    .full-cell-button:hover, .full-cell-button:focus {
+        opacity: 1;
+    }
+
+    .table-padding {
+        width: 32px;
+        height: 32px;
     }
 
     .included-button {
@@ -248,7 +283,7 @@ import NewRowHeader from './NewRowHeader';
     }
 
     .table tfoot td {
-        vertical-align: center;
+        vertical-align: middle;
         text-align: center;
     }
 </style>
