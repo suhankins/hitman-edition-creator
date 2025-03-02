@@ -1,8 +1,26 @@
 ---
-import Table from '../components/Table.astro';
+import Table from '../components/Table/Table.astro';
+import TakeScreenshotButton from '../components/TakeScreenshotButton.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-	<Table />
+    <div class="container">
+        <h1>HITMAN Edition Creator</h1>
+        <p>You think IOI's "Comparison Grid" isn't absurd enough? Then show 'em how it's done!</p>
+        <Table />
+		<br />
+        <footer>
+            <TakeScreenshotButton />
+        </footer>
+    </div>
 </Layout>
+
+<style>
+	.container {
+        margin-left: auto;
+        margin-right: auto;
+		width: fit-content;
+		text-align: center;
+	}
+</style>

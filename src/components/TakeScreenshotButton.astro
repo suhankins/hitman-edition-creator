@@ -1,0 +1,115 @@
+<button class="action-button" data-download-as-png> Download as PNG </button>
+<button class="action-button" data-copy-to-clipboard>
+    Copy to clipboard
+</button>
+
+<style>
+    .action-button {
+        display: inline-flex;
+        gap: 0.5ch;
+        font-size: inherit;
+        font-family: inherit;
+        font-weight: inherit;
+        padding: 10px;
+        align-items: center;
+        border: none;
+        border-radius: 0;
+        background-color: #2f414588;
+    }
+
+    .action-button:disabled {
+        opacity: 0.8;
+    }
+
+    .action-button::before {
+        content: '';
+        width: 32px;
+        height: 32px;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .action-button:hover,
+    .action-button:focus {
+        background-color: #f8021b;
+    }
+
+    .action-button[data-download-as-png]::before {
+        background-image: url('/download.svg');
+    }
+
+    .action-button[data-copy-to-clipboard]::before {
+        background-image: url('/copy.svg');
+    }
+
+    .action-button[data-download-as-png]:hover::before,
+    .action-button[data-download-as-png]:focus::before {
+        background-image: url('/download-hover.svg');
+    }
+
+    .action-button[data-copy-to-clipboard]:hover::before,
+    .action-button[data-copy-to-clipboard]:focus::before {
+        background-image: url('/copy-hover.svg');
+    }
+</style>
+
+<script>
+    import html2canvas from '@cantoo/html2canvas';
+
+    async function convertToCanvast() {
+        return html2canvas(
+            document.querySelector('[data-edition-table]')!
+                .parentElement as HTMLElement,
+            {
+                ignoreElements: (element) =>
+                    element.children?.item(0)?.className ===
+                        'full-cell-button' ||
+                    element.children?.item(0)?.className === 'table-padding',
+                scale: window.devicePixelRatio + 1,
+            }
+        );
+    }
+
+    async function canvasToBlob(
+        canvas: HTMLCanvasElement
+    ): Promise<Blob | null> {
+        return new Promise((resolve) => {
+            canvas.toBlob((blob) => resolve(blob));
+        });
+    }
+
+    document
+        .querySelector('[data-download-as-png]')
+        ?.addEventListener('click', async (event) => {
+            const target = event.target as HTMLButtonElement;
+            target.disabled = true;
+            await convertToCanvast().then((canvas) => {
+                const image = canvas.toDataURL();
+                const downloadLink = document.createElement('a');
+                downloadLink.download = 'comparisonGrid.png';
+                downloadLink.href = image;
+                downloadLink.click();
+            });
+            target.disabled = false;
+        });
+
+    document
+        .querySelector('[data-copy-to-clipboard]')
+        ?.addEventListener('click', async (event) => {
+            const target = event.target as HTMLButtonElement;
+            target.disabled = true;
+            await convertToCanvast().then(async (canvas) => {
+                const image = await canvasToBlob(canvas);
+                if (image === null) {
+                    alert('Error while creating the image!');
+                    return;
+                }
+                await navigator.clipboard.write([
+                    new ClipboardItem({
+                        [image.type]: image,
+                    }),
+                ]);
+            });
+            target.disabled = false;
+        });
+</script>
