@@ -3,30 +3,33 @@
 <script>
     import NewCell from './NewCell';
     import NewColumnHeader from './NewColumnHeader';
-    import NewDeleteButton from './NewDeleteButton';
+    import NewDeleteColumnButton from './NewDeleteColumnButton';
 
     document.querySelectorAll('[data-add-column-button]').forEach((button) => {
         button.addEventListener('click', () => {
             const table = document.querySelector(
                 '[data-edition-table]'
             ) as HTMLTableElement;
-            const newColumnIndex = table.tHead?.rows.item(0)!.cells.length;
+            const newColumnIndex = table.tHead!.rows.item(0)!.cells.length - 1;
 
+            const headers = table.tHead!.rows.item(0) as HTMLTableRowElement;
+            let headingCell = headers.insertCell(headers.cells.length - 1);
             const heading = document.createElement('th');
             heading.dataset.tableColumn = `${newColumnIndex}`;
             heading.innerHTML = NewColumnHeader();
-            table.tHead!.rows.item(0)?.appendChild(heading);
+            headingCell.outerHTML = heading.outerHTML;
 
             const tBody = table.tBodies.item(0) as HTMLTableSectionElement;
             for (let i = 0; i < tBody.rows.length; i++) {
                 const row = tBody.rows.item(i) as HTMLTableRowElement;
-                const cell = row.insertCell();
+                const cell = row.insertCell(row.cells.length - 1);
                 cell.dataset.tableColumn = `${newColumnIndex}`;
                 cell.innerHTML = NewCell();
             }
 
-            const deleteButtonCell = table.tFoot!.rows.item(0)!.insertCell();
-            deleteButtonCell.innerHTML = NewDeleteButton();
+            const footers = table.tFoot!.rows.item(0) as HTMLTableRowElement;
+            const deleteButtonCell = footers.insertCell(footers.cells.length - 1);
+            deleteButtonCell.innerHTML = NewDeleteColumnButton();
             deleteButtonCell.dataset.tableColumn = `${newColumnIndex}`;
         });
     });

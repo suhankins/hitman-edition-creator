@@ -3,7 +3,8 @@ import AddRowButton from './AddRowButton.astro';
 import ComparisonGridHeader from './ComparisonGridHeader.astro';
 import NewCell from './NewCell';
 import NewColumnHeader from './NewColumnHeader';
-import NewDeleteButton from './NewDeleteButton';
+import NewDeleteColumnButton from './NewDeleteColumnButton';
+import NewDeleteRowButton from './NewDeleteRowButton';
 import NewRowHeader from './NewRowHeader';
 ---
 
@@ -23,12 +24,15 @@ import NewRowHeader from './NewRowHeader';
                 <th data-table-column="3">
                     <Fragment set:html={NewColumnHeader('Deluxe Edition')} />
                 </th>
+                <td></td>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th>
-                    <Fragment set:html={NewRowHeader('ICA Training Facility')} />
+                    <Fragment
+                        set:html={NewRowHeader('Free Seasonal Content')}
+                    />
                 </th>
                 <td data-table-column="1">
                     <Fragment set:html={NewCell()} />
@@ -39,6 +43,28 @@ import NewRowHeader from './NewRowHeader';
                 <td data-table-column="3">
                     <Fragment set:html={NewCell(true)} />
                 </td>
+                <td>
+                    <Fragment set:html={NewDeleteRowButton()} />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <Fragment
+                        set:html={NewRowHeader('ICA Training Facility')}
+                    />
+                </th>
+                <td data-table-column="1">
+                    <Fragment set:html={NewCell()} />
+                </td>
+                <td data-table-column="2">
+                    <Fragment set:html={NewCell(true)} />
+                </td>
+                <td data-table-column="3">
+                    <Fragment set:html={NewCell(true)} />
+                </td>
+                <td>
+                    <Fragment set:html={NewDeleteRowButton()} />
+                </td>
             </tr>
         </tbody>
         <tfoot>
@@ -47,14 +73,15 @@ import NewRowHeader from './NewRowHeader';
                     <AddRowButton />
                 </td>
                 <td data-table-column="1">
-                    <Fragment set:html={NewDeleteButton()} />
+                    <Fragment set:html={NewDeleteColumnButton()} />
                 </td>
                 <td data-table-column="2">
-                    <Fragment set:html={NewDeleteButton()} />
+                    <Fragment set:html={NewDeleteColumnButton()} />
                 </td>
                 <td data-table-column="3">
-                    <Fragment set:html={NewDeleteButton()} />
+                    <Fragment set:html={NewDeleteColumnButton()} />
                 </td>
+                <td></td>
             </tr>
         </tfoot>
     </table>
@@ -83,9 +110,13 @@ import NewRowHeader from './NewRowHeader';
             }
             const elementTableColumn = parseInt(element.dataset.tableColumn);
             if (elementTableColumn > parsedTableColumn) {
-                element.dataset.dataColumn = `${parsedTableColumn - 1}`;
+                element.dataset.tableColumn = `${elementTableColumn - 1}`;
             }
         });
+    }
+
+    function deleteRow(deleteButton) {
+        deleteButton?.parentElement?.parentElement.remove();
     }
 </script>
 
@@ -152,7 +183,7 @@ import NewRowHeader from './NewRowHeader';
     }
 
     .table tbody th,
-    .table tbody td {
+    .table tbody td:not(:last-child) {
         background-color: #2f414588;
         height: 2.5em;
     }
@@ -214,5 +245,10 @@ import NewRowHeader from './NewRowHeader';
         width: 1px;
         background-color: #2f414588;
         height: 100%;
+    }
+
+    .table tfoot td {
+        vertical-align: center;
+        text-align: center;
     }
 </style>
