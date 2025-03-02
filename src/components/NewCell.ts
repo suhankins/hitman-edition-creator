@@ -1,8 +1,7 @@
-const NEW_CELL = `<label>
-    <div class="content">
-        <img src="/arrow.svg" alt="" /> Included
-        <input type="checkbox" />
-    </div>
-</label>`;
+const NEW_CELL = `<button
+    class="included-button"
+    onclick="this.ariaPressed = !(this.ariaPressed === 'true')">
+        Included
+</button>`;
 
 export default NEW_CELL;

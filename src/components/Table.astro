@@ -49,28 +49,25 @@ import ComparisonGridHeader from './ComparisonGridHeader.astro';
             <tr>
                 <th><p contenteditable>ICA Training Thing</p></th>
                 <td data-table-column="1">
-                    <label>
-                        <div class="content">
-                            <img src="/arrow.svg" alt="" /> Included
-                            <input type="checkbox" />
-                        </div>
-                    </label>
+                    <button
+                        class="included-button"
+                        onclick="this.ariaPressed = !(this.ariaPressed === 'true')"
+                        >Included</button
+                    >
                 </td>
                 <td data-table-column="2">
-                    <label>
-                        <div class="content">
-                            <img src="/arrow.svg" alt="" /> Included
-                            <input type="checkbox" />
-                        </div>
-                    </label>
+                    <button
+                        class="included-button"
+                        onclick="this.ariaPressed = !(this.ariaPressed === 'true')"
+                        >Included</button
+                    >
                 </td>
                 <td data-table-column="3">
-                    <label>
-                        <div class="content">
-                            <img src="/arrow.svg" alt="" /> Included
-                            <input type="checkbox" />
-                        </div>
-                    </label>
+                    <button
+                        class="included-button"
+                        onclick="this.ariaPressed = !(this.ariaPressed === 'true')"
+                        >Included</button
+                    >
                 </td>
             </tr>
         </tbody>
@@ -110,19 +107,15 @@ import ComparisonGridHeader from './ComparisonGridHeader.astro';
     function deleteColumn(deleteButton) {
         const tableColumn = deleteButton.parentElement.dataset.tableColumn;
         const parsedTableColumn = parseInt(tableColumn);
-        document
-            .querySelectorAll(
-                `[data-table-column]`
-            )
-            .forEach((element) => {
-                if (element.dataset.tableColumn === tableColumn) {
-                    element.remove();
-                }
-                const elementTableColumn = parseInt(element.dataset.tableColumn);
-                if (elementTableColumn > parsedTableColumn) {
-                    element.dataset.dataColumn = `${parsedTableColumn - 1}`
-                }
-            });
+        document.querySelectorAll(`[data-table-column]`).forEach((element) => {
+            if (element.dataset.tableColumn === tableColumn) {
+                element.remove();
+            }
+            const elementTableColumn = parseInt(element.dataset.tableColumn);
+            if (elementTableColumn > parsedTableColumn) {
+                element.dataset.dataColumn = `${parsedTableColumn - 1}`;
+            }
+        });
     }
 </script>
 
@@ -194,30 +187,45 @@ import ComparisonGridHeader from './ComparisonGridHeader.astro';
         height: 2.5em;
     }
 
-    .table tbody td:has(input:checked) {
+    .table tbody td {
+        padding: 0;
+        position: relative;
+    }
+
+    .included-button {
         background-color: #f8021b;
         text-align: center;
-    }
-
-    .table tbody td label {
-        display: flex;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
         width: 100%;
         height: 100%;
-        align-items: center;
+        font-size: inherit;
+        font-family: inherit;
+        border: none;
+        display: flex;
+        gap: 0.5ch;
         justify-content: center;
-        user-select: none;
+        align-items: center;
     }
 
-    .table tbody td label .content {
-        visibility: hidden;
+    .included-button:not([aria-pressed='true']) {
+        opacity: 0;
     }
 
-    .table tbody td:has(input:checked) label .content {
-        visibility: visible;
+    .included-button:not([aria-pressed='true']):hover {
+        opacity: 0.5;
     }
 
-    .table tbody td input[type='checkbox'] {
-        display: none;
+    .included-button::before {
+        content: '';
+        width: 16.1667px;
+        height: 16.1667px;
+        background-image: url('/arrow.svg');
+        background-size: contain;
+        display: block;
     }
 
     .table tbody th {
