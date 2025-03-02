@@ -1,4 +1,6 @@
-<button class="full-cell-button" data-add-row-button><img src="/plus.svg" alt="Add row" /></button>
+<button class="full-cell-button" data-add-row-button
+    ><img src="/plus.svg" alt="Add row" /></button
+>
 
 <script>
     import NewCell from './NewCell';
@@ -11,12 +13,14 @@
                 '[data-edition-table]'
             ) as HTMLTableElement;
             const tBody = table.tBodies.item(0) as HTMLTableSectionElement;
-            const lastRow = tBody.rows.item(tBody.rows.length - 1);
+            const lastRow =
+                tBody.rows.item(tBody.rows.length - 1) ??
+                table.tHead?.rows.item(0);
             const newRow = tBody.insertRow();
             const heading = document.createElement('th');
             heading.innerHTML = NewRowHeader();
             newRow.appendChild(heading);
-            for (let i = 1; i < (lastRow?.children.length ?? 0) - 1; i++) {
+            for (let i = 1; i < lastRow!.children.length - 1; i++) {
                 const cell = newRow.insertCell();
                 cell.dataset.tableColumn = `${i}`;
                 cell.innerHTML = NewCell();
