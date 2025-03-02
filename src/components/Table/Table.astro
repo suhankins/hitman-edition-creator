@@ -177,9 +177,13 @@ import DEFAULT_STATE from './DefaultTableState';
     }
 
     .table tbody th,
-    .table tbody td:not(:last-child) {
+    .table tbody td {
         background-color: #2f414588;
         height: 2.5em;
+    }
+
+    .table tbody td:has(.full-cell-button) {
+        background: none;
     }
 
     .table tbody td {
