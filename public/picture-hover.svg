@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="24px" height="24px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 13.97 13.97"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:white;stroke-width:1.35;stroke-miterlimit:22.9256}
+    .fil0 {fill:none}
+    .fil1 {fill:white}
+   ]]>
+  </style>
+ </defs>
+  <path class="fil0 str0" d="M2.45 0.68l9.08 0c0.97,0 1.77,0.8 1.77,1.77l0 9.08c0,0.97 -0.8,1.77 -1.77,1.77l-9.08 0c-0.97,0 -1.77,-0.8 -1.77,-1.77l0 -9.08c0,-0.97 0.8,-1.77 1.77,-1.77z"/>
+  <path class="fil1" d="M8.46 4.56c0.96,0 0.96,1.46 0,1.46 -0.96,0 -0.96,-1.46 0,-1.46zm-4.86 -2.23l6.77 0c0.7,0 1.27,0.57 1.27,1.27l0 6.77c0,0.69 -0.57,1.27 -1.27,1.27l-6.77 0c-0.7,0 -1.27,-0.57 -1.27,-1.27l0 -6.77c0,-0.69 0.57,-1.27 1.27,-1.27zm0.09 6.12c3.19,-3.3 1.94,-3.42 6.33,1.82l0.27 0 0 -6.6 -6.6 0 0 4.77zm4.57 1.82l-2.07 -2.47 -2.39 2.47 4.46 0z"/>
+</svg>

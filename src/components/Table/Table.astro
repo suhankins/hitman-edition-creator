@@ -136,19 +136,29 @@ const { state } = Astro.props;
         position: absolute;
         width: 100%;
         height: 100%;
+        border: none;
+        background-color: #2c2c2c;
+    }
+
+    .edition-cover::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: no-repeat center/2em url('/picture.svg');
+    }
+
+    .edition-cover:not(:hover):has(.edition-cover-image[src])::after {
+        background: none;
+    }
+
+    .edition-cover:hover::after,
+    .edition-cover:focus::after {
+        background: no-repeat center/2em url('/picture-hover.svg'), #f8021b88;
     }
 
     .edition-cover-selector {
-        color: transparent;
-        width: 9ch;
-    }
-
-    .edition-cover .edition-cover-selector[data-image-applied] {
         visibility: hidden;
-    }
-
-    .edition-cover:hover .edition-cover-selector[data-image-applied] {
-        visibility: visible;
     }
 
     .table th {
