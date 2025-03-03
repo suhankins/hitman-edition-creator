@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="4.2776mm" height="4.2776mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 13.05 13.05"
- xmlns:xlink="http://www.w3.org/1999/xlink"
- xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="24px" height="24px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 15.95 15.95"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
   <style type="text/css">
    <![CDATA[
-    .fil0 {fill:white}
+    .str0 {stroke:white;stroke-width:1.54;stroke-miterlimit:22.9256}
+    .fil0 {fill:none}
+    .fil1 {fill:white}
    ]]>
   </style>
  </defs>
-   <path class="fil0" d="M1.83 0l9.39 0c1.01,0 1.83,0.82 1.83,1.83l0 9.39c0,1.01 -0.82,1.83 -1.83,1.83l-9.39 0c-1.01,0 -1.83,-0.82 -1.83,-1.83l0 -9.39c0,-1.01 0.82,-1.83 1.83,-1.83zm9.39 1.4l-9.39 0c-0.12,0 -0.23,0.05 -0.31,0.13 -0.08,0.08 -0.13,0.19 -0.13,0.31l0 9.39c0,0.12 0.05,0.23 0.13,0.3 0.08,0.08 0.19,0.13 0.3,0.13l9.39 0c0.12,0 0.23,-0.05 0.3,-0.12l0.01 -0.01c0.08,-0.08 0.12,-0.18 0.12,-0.3l0 -9.39c0,-0.12 -0.05,-0.23 -0.13,-0.3 -0.08,-0.08 -0.19,-0.13 -0.3,-0.13z"/>
-   <path class="fil0" d="M10.34 3.99l0.76 0 0 0.48 -0.76 0 0 -0.48zm0.76 5.08l0 -4.59 -0.76 0.76 0 3.83 0.76 0zm-2.51 -2.53l-2.06 2.06 -2.06 -2.06 2.06 -2.06 2.06 2.06zm-1.48 2.53l2.13 -2.12 0 -0.83 -2.13 -2.13 -1.17 0 -2.13 2.13 0 0.83 2.12 2.12 1.17 0zm-5.17 -5.08l0.76 0 0 0.48 -0.76 0 0 -0.48zm0.76 5.08l0 -4.59 -0.76 0.76 0 3.83 0.76 0z"/>
+  <path class="fil0 str0" d="M2.79 0.77l10.36 0c1.11,0 2.02,0.91 2.02,2.02l0 10.36c0,1.11 -0.91,2.02 -2.02,2.02l-10.36 0c-1.11,0 -2.02,-0.91 -2.02,-2.02l0 -10.36c0,-1.11 0.91,-2.02 2.02,-2.02z"/>
+   <path class="fil1" d="M12.18 5.18l0.84 0 0 0.53 -0.84 0 0 -0.53zm0.84 5.6l0 -5.07 -0.84 0.84 0 4.23 0.84 0zm-2.77 -2.8l-2.27 2.27 -2.27 -2.27 2.27 -2.27 2.27 2.27zm-1.63 2.8l2.35 -2.34 0 -0.92 -2.35 -2.35 -1.29 0 -2.35 2.35 0 0.92 2.34 2.34 1.29 0zm-5.71 -5.6l0.84 0 0 0.53 -0.84 0 0 -0.53zm0.84 5.6l0 -5.07 -0.84 0.84 0 4.23 0.84 0z"/>
 </svg>
