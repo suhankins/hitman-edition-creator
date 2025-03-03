@@ -4,7 +4,6 @@ const BLANK_STATE: ITableState = {
     editions: [
         {
             name: 'Standard Edition',
-            image: 'todo',
         },
     ],
     content: [

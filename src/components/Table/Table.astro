@@ -27,7 +27,7 @@ const { state } = Astro.props;
                     state.editions.map((edition, index) => (
                         <th data-table-column={index + 1}>
                             <Fragment
-                                set:html={NewColumnHeader(edition.name)}
+                                set:html={NewColumnHeader(edition.name, edition.image)}
                             />
                         </th>
                     ))

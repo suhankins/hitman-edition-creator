@@ -1,7 +1,7 @@
 export default interface ITableState {
     editions: {
         name: string;
-        image: string;
+        image?: string;
     }[];
     content: {
         name: string;

@@ -1,26 +1,26 @@
-import type ITableState from "./ITableState";
+import type ITableState from './ITableState';
 
 const DEFAULT_STATE: ITableState = {
     editions: [
         {
             name: 'Free Starter Pack',
-            image: 'todo',
+            image: '/covers/free.png',
         },
         {
             name: 'Episode: Sapienza',
-            image: 'todo',
+            image: '/covers/sapienza.png',
         },
         {
             name: 'Part One',
-            image: 'todo',
+            image: '/covers/partone.png',
         },
         {
             name: 'Standard Edition',
-            image: 'todo',
+            image: '/covers/standard.png',
         },
         {
             name: 'Deluxe Edition',
-            image: 'todo',
+            image: '/covers/deluxe.png',
         },
     ],
     content: [
