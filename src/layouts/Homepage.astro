@@ -1,0 +1,37 @@
+---
+import TakeScreenshotButton from '../components/TakeScreenshotButton.astro';
+import TemplateSwitch from '../components/TemplateSwitch.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <div class="container">
+        <h1>HITMAN Edition Creator</h1>
+        <p>
+            You think IOI's "Comparison Grid" isn't absurd enough? Then show 'em
+            how it's done!
+        </p>
+        <slot />
+        <br />
+        <TakeScreenshotButton />
+        <footer>
+            <p>
+                This website on <a
+                    href="https://github.com/suhankins/hitman-edition-creator"
+                    >GitHub</a
+                >. Made by Punished Bernadetta. This project is not affiliated
+                with IO Interactive.
+            </p>
+            <p>We don't collect or store any of your data.</p>
+        </footer>
+    </div>
+</Layout>
+
+<style>
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+        text-align: center;
+    }
+</style>

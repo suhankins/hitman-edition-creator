@@ -1,9 +1,27 @@
 ---
 import ActionButton from './ActionButton.astro';
+
+interface Props {
+    selected?: 'default' | 'blank';
+}
+
+const { selected } = Astro.props;
 ---
 
-<ActionButton data-default-template href="https://example.com/"> Default </ActionButton>
-<ActionButton data-blank-template href="https://example.com/"> Blank </ActionButton>
+<ActionButton
+    data-default-template
+    aria-pressed={selected === 'default'}
+    href="/"
+>
+    Default
+</ActionButton>
+<ActionButton
+    data-blank-template
+    aria-pressed={selected === 'blank'}
+    href="/blank"
+>
+    Blank
+</ActionButton>
 
 <style>
     [data-default-template]::before {
@@ -15,12 +33,14 @@ import ActionButton from './ActionButton.astro';
     }
 
     [data-default-template]:hover::before,
-    [data-default-template]:focus::before {
+    [data-default-template]:focus::before,
+    [data-default-template][aria-pressed='true']::before {
         background-image: url('/ioi-hover.svg');
     }
 
     [data-blank-template]:hover::before,
-    [data-blank-template]:focus::before {
+    [data-blank-template]:focus::before,
+    [data-blank-template][aria-pressed='true']::before {
         background-image: url('/table-hover.svg');
     }
 </style>

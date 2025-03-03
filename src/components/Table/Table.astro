@@ -7,7 +7,13 @@ import NewColumnHeader from './NewColumnHeader';
 import NewDeleteColumnButton from './NewDeleteColumnButton';
 import NewDeleteRowButton from './NewDeleteRowButton';
 import NewRowHeader from './NewRowHeader';
-import DEFAULT_STATE from './states/DefaultTableState';
+import type ITableState from './states/ITableState';
+
+interface Props {
+    state: ITableState;
+}
+
+const { state } = Astro.props;
 ---
 
 <div class="background">
@@ -18,7 +24,7 @@ import DEFAULT_STATE from './states/DefaultTableState';
                     <ComparisonGridHeader />
                 </td>
                 {
-                    DEFAULT_STATE.editions.map((edition, index) => (
+                    state.editions.map((edition, index) => (
                         <th data-table-column={index + 1}>
                             <Fragment
                                 set:html={NewColumnHeader(edition.name)}
@@ -33,7 +39,7 @@ import DEFAULT_STATE from './states/DefaultTableState';
         </thead>
         <tbody>
             {
-                DEFAULT_STATE.content.map((content) => (
+                state.content.map((content) => (
                     <tr>
                         <th>
                             <Fragment set:html={NewRowHeader(content.name)} />
@@ -55,7 +61,7 @@ import DEFAULT_STATE from './states/DefaultTableState';
                         <AddRowButton />
                     </td>
                     {
-                        DEFAULT_STATE.editions.map((_, index) => (
+                        state.editions.map((_, index) => (
                             <td data-table-column={index + 1}>
                                 <Fragment set:html={NewDeleteColumnButton()} />
                             </td>

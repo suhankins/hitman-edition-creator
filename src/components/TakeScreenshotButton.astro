@@ -15,12 +15,14 @@ import ActionButton from './ActionButton.astro';
     }
 
     [data-download-as-png]:hover::before,
-    [data-download-as-png]:focus::before {
+    [data-download-as-png]:focus::before,
+    [data-download-as-png][aria-pressed="true"]::before {
         background-image: url('/download-hover.svg');
     }
 
     [data-copy-to-clipboard]:hover::before,
-    [data-copy-to-clipboard]:focus::before {
+    [data-copy-to-clipboard]:focus::before,
+    [data-copy-to-clipboard][aria-pressed="true"]::before {
         background-image: url('/copy-hover.svg');
     }
 </style>
