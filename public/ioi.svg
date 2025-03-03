@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="4.2776mm" height="4.2776mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 13.05 13.05"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:white}
+   ]]>
+  </style>
+ </defs>
+  <path class="fil0" d="M1.83 0l9.39 0c1.01,0 1.83,0.82 1.83,1.83l0 9.39c0,1.01 -0.82,1.83 -1.83,1.83l-9.39 0c-1.01,0 -1.83,-0.82 -1.83,-1.83l0 -9.39c0,-1.01 0.82,-1.83 1.83,-1.83zm8.51 3.99l0.76 0 0 0.48 -0.76 0 0 -0.48zm0.76 5.08l0 -4.59 -0.76 0.76 0 3.83 0.76 0zm-2.51 -2.53l-2.06 2.06 -2.06 -2.06 2.06 -2.06 2.06 2.06zm-1.48 2.53l2.13 -2.12 0 -0.83 -2.13 -2.13 -1.17 0 -2.13 2.13 0 0.83 2.12 2.12 1.17 0zm-5.17 -5.08l0.76 0 0 0.48 -0.76 0 0 -0.48zm0.76 5.08l0 -4.59 -0.76 0.76 0 3.83 0.76 0z"/>
+</svg>

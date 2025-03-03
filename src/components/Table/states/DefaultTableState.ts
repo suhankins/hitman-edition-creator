@@ -1,4 +1,6 @@
-const DEFAULT_STATE = {
+import type ITableState from "./ITableState";
+
+const DEFAULT_STATE: ITableState = {
     editions: [
         {
             name: 'Free Starter Pack',

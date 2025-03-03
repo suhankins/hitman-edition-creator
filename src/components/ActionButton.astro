@@ -1,0 +1,53 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'button'> & HTMLAttributes<'a'>;
+
+const { ...props } = Astro.props;
+---
+
+{
+    'href' in props ? (
+        <a {...props} class="action-button">
+            <slot />
+        </a>
+    ) : (
+        <button {...props} class="action-button">
+            <slot />
+        </button>
+    )
+}
+
+<style>
+    .action-button {
+        display: inline-flex;
+        gap: 0.5ch;
+        font-size: inherit;
+        font-family: inherit;
+        font-weight: inherit;
+        color: inherit;
+        padding: 10px;
+        align-items: center;
+        border: none;
+        border-radius: 0;
+        background-color: #2f414588;
+        text-decoration: none;
+    }
+
+    .action-button:disabled {
+        opacity: 0.8;
+    }
+
+    .action-button::before {
+        content: '';
+        width: 32px;
+        height: 32px;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .action-button:hover,
+    .action-button:focus {
+        background-color: #f8021b;
+    }
+</style>

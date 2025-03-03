@@ -1,0 +1,26 @@
+---
+import ActionButton from './ActionButton.astro';
+---
+
+<ActionButton data-default-template href="https://example.com/"> Default </ActionButton>
+<ActionButton data-blank-template href="https://example.com/"> Blank </ActionButton>
+
+<style>
+    [data-default-template]::before {
+        background-image: url('/ioi.svg');
+    }
+
+    [data-blank-template]::before {
+        background-image: url('/table.svg');
+    }
+
+    [data-default-template]:hover::before,
+    [data-default-template]:focus::before {
+        background-image: url('/ioi-hover.svg');
+    }
+
+    [data-blank-template]:hover::before,
+    [data-blank-template]:focus::before {
+        background-image: url('/table-hover.svg');
+    }
+</style>

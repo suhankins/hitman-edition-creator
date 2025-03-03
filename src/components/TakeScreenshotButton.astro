@@ -1,54 +1,26 @@
-<button class="action-button" data-download-as-png> Download as PNG </button>
-<button class="action-button" data-copy-to-clipboard>
-    Copy to clipboard
-</button>
+---
+import ActionButton from './ActionButton.astro';
+---
+
+<ActionButton data-download-as-png> Download as PNG </ActionButton>
+<ActionButton data-copy-to-clipboard> Copy to clipboard </ActionButton>
 
 <style>
-    .action-button {
-        display: inline-flex;
-        gap: 0.5ch;
-        font-size: inherit;
-        font-family: inherit;
-        font-weight: inherit;
-        padding: 10px;
-        align-items: center;
-        border: none;
-        border-radius: 0;
-        background-color: #2f414588;
-    }
-
-    .action-button:disabled {
-        opacity: 0.8;
-    }
-
-    .action-button::before {
-        content: '';
-        width: 32px;
-        height: 32px;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    .action-button:hover,
-    .action-button:focus {
-        background-color: #f8021b;
-    }
-
-    .action-button[data-download-as-png]::before {
+    [data-download-as-png]::before {
         background-image: url('/download.svg');
     }
 
-    .action-button[data-copy-to-clipboard]::before {
+    [data-copy-to-clipboard]::before {
         background-image: url('/copy.svg');
     }
 
-    .action-button[data-download-as-png]:hover::before,
-    .action-button[data-download-as-png]:focus::before {
+    [data-download-as-png]:hover::before,
+    [data-download-as-png]:focus::before {
         background-image: url('/download-hover.svg');
     }
 
-    .action-button[data-copy-to-clipboard]:hover::before,
-    .action-button[data-copy-to-clipboard]:focus::before {
+    [data-copy-to-clipboard]:hover::before,
+    [data-copy-to-clipboard]:focus::before {
         background-image: url('/copy-hover.svg');
     }
 </style>
