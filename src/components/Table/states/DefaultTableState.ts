@@ -3,15 +3,15 @@ import type ITableState from './ITableState';
 const DEFAULT_STATE: ITableState = {
     editions: [
         {
-            name: 'Free Starter Pack',
+            name: 'Free\nStarter Pack',
             image: '/covers/free.png',
         },
         {
-            name: 'Episode: Sapienza',
+            name: 'Episode:\nSapienza',
             image: '/covers/sapienza.png',
         },
         {
-            name: 'Part One',
+            name: 'Part\nOne',
             image: '/covers/partone.png',
         },
         {
@@ -19,7 +19,7 @@ const DEFAULT_STATE: ITableState = {
             image: '/covers/standard.png',
         },
         {
-            name: 'Deluxe Edition',
+            name: 'Deluxe\nEdition',
             image: '/covers/deluxe.png',
         },
     ],
