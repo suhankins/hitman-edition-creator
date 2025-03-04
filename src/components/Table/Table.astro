@@ -2,10 +2,10 @@
 import AddColumnButton from './AddColumnButton.astro';
 import AddRowButton from './AddRowButton.astro';
 import ComparisonGridHeader from './ComparisonGridHeader.astro';
-import NewCell from './NewCell';
-import NewColumnHeader from './NewColumnHeader';
-import NewDeleteColumnButton from './NewDeleteColumnButton';
-import NewDeleteRowButton from './NewDeleteRowButton';
+import NewCell from './Cell/NewCell';
+import NewColumnHeader from './ColumnHeader/NewColumnHeader';
+import NewDeleteColumnButton from './DeleteColumnButton/NewDeleteColumnButton';
+import NewDeleteRowButton from './DeleteRowButton/NewDeleteRowButton';
 import NewRowHeader from './NewRowHeader';
 import type ITableState from './states/ITableState';
 
@@ -27,7 +27,10 @@ const { state } = Astro.props;
                     state.editions.map((edition, index) => (
                         <th data-table-column={index + 1}>
                             <Fragment
-                                set:html={NewColumnHeader(edition.name, edition.image)}
+                                set:html={NewColumnHeader(
+                                    edition.name,
+                                    edition.image
+                                )}
                             />
                         </th>
                     ))
@@ -76,34 +79,16 @@ const { state } = Astro.props;
     </table>
 </div>
 
-<script is:inline>
-    function selectCover(element) {
-        const newImageUrl = window.URL.createObjectURL(element.files[0]);
-        const oldImageUrl = element.previousElementSibling.src.slice(5, -2);
-        if (oldImageUrl.startsWith('blob:')) {
-            window.URL.revokeObjectURL(oldImageUrl);
-        }
-        element.previousElementSibling.src = newImageUrl;
-        element.dataset.imageApplied = true;
-    }
+<script>
+    import registerCellListeners from './Cell/RegisterCellListeners';
+    import registerColumnHeaderListeners from './ColumnHeader/RegisterColumnHeaderListeners';
+    import registerDeleteColumnButtonListeners from './DeleteColumnButton/RegisterDeleteColumnButtonListeners';
+    import registerDeleteRowButtonListeners from './DeleteRowButton/RegisterDeleteRowButtonListeners';
 
-    function deleteColumn(deleteButton) {
-        const tableColumn = deleteButton.parentElement.dataset.tableColumn;
-        const parsedTableColumn = parseInt(tableColumn);
-        document.querySelectorAll(`[data-table-column]`).forEach((element) => {
-            if (element.dataset.tableColumn === tableColumn) {
-                element.remove();
-            }
-            const elementTableColumn = parseInt(element.dataset.tableColumn);
-            if (elementTableColumn > parsedTableColumn) {
-                element.dataset.tableColumn = `${elementTableColumn - 1}`;
-            }
-        });
-    }
-
-    function deleteRow(deleteButton) {
-        deleteButton?.parentElement?.parentElement.remove();
-    }
+    registerCellListeners();
+    registerColumnHeaderListeners();
+    registerDeleteColumnButtonListeners();
+    registerDeleteRowButtonListeners();
 </script>
 
 <style is:global>
@@ -154,7 +139,9 @@ const { state } = Astro.props;
 
     .edition-cover:hover::after,
     .edition-cover:focus::after {
-        background: no-repeat center/2em url('/picture-hover.svg'), #f8021b88;
+        background:
+            no-repeat center/2em url('/picture-hover.svg'),
+            #f8021b88;
     }
 
     .edition-cover-selector {

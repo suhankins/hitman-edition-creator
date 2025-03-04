@@ -1,9 +1,14 @@
-<button class="full-cell-button" data-add-column-button><img src="/plus.svg" alt="Add column" /></button>
+<button class="full-cell-button" data-add-column-button
+    ><img src="/plus.svg" alt="Add column" /></button
+>
 
 <script>
-    import NewCell from './NewCell';
-    import NewColumnHeader from './NewColumnHeader';
-    import NewDeleteColumnButton from './NewDeleteColumnButton';
+    import NewCell from './Cell/NewCell';
+    import registerCellListeners from './Cell/RegisterCellListeners';
+    import NewColumnHeader from './ColumnHeader/NewColumnHeader';
+    import registerColumnHeaderListeners from './ColumnHeader/RegisterColumnHeaderListeners';
+    import NewDeleteColumnButton from './DeleteColumnButton/NewDeleteColumnButton';
+    import registerDeleteColumnButtonListeners from './DeleteColumnButton/RegisterDeleteColumnButtonListeners';
 
     document.querySelectorAll('[data-add-column-button]').forEach((button) => {
         button.addEventListener('click', () => {
@@ -18,6 +23,7 @@
             heading.dataset.tableColumn = `${newColumnIndex}`;
             heading.innerHTML = NewColumnHeader();
             headingCell.outerHTML = heading.outerHTML;
+            registerColumnHeaderListeners();
 
             const tBody = table.tBodies.item(0) as HTMLTableSectionElement;
             for (let i = 0; i < tBody.rows.length; i++) {
@@ -26,11 +32,15 @@
                 cell.dataset.tableColumn = `${newColumnIndex}`;
                 cell.innerHTML = NewCell();
             }
+            registerCellListeners();
 
             const footers = table.tFoot!.rows.item(0) as HTMLTableRowElement;
-            const deleteButtonCell = footers.insertCell(footers.cells.length - 1);
+            const deleteButtonCell = footers.insertCell(
+                footers.cells.length - 1
+            );
             deleteButtonCell.innerHTML = NewDeleteColumnButton();
             deleteButtonCell.dataset.tableColumn = `${newColumnIndex}`;
+            registerDeleteColumnButtonListeners();
         });
     });
 </script>

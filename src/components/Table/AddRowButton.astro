@@ -3,8 +3,10 @@
 >
 
 <script>
-    import NewCell from './NewCell';
-    import NewDeleteRowButton from './NewDeleteRowButton';
+    import NewCell from './Cell/NewCell';
+    import registerCellListeners from './Cell/RegisterCellListeners';
+    import NewDeleteRowButton from './DeleteRowButton/NewDeleteRowButton';
+    import registerDeleteRowButtonListeners from './DeleteRowButton/RegisterDeleteRowButtonListeners';
     import NewRowHeader from './NewRowHeader';
 
     document.querySelectorAll('[data-add-row-button]').forEach((button) => {
@@ -17,16 +19,21 @@
                 tBody.rows.item(tBody.rows.length - 1) ??
                 table.tHead?.rows.item(0);
             const newRow = tBody.insertRow();
+
             const heading = document.createElement('th');
             heading.innerHTML = NewRowHeader();
             newRow.appendChild(heading);
+
             for (let i = 1; i < lastRow!.children.length - 1; i++) {
                 const cell = newRow.insertCell();
                 cell.dataset.tableColumn = `${i}`;
                 cell.innerHTML = NewCell();
             }
+            registerCellListeners();
+
             const deleteButtonCell = newRow.insertCell();
             deleteButtonCell.innerHTML = NewDeleteRowButton();
+            registerDeleteRowButtonListeners();
         });
     });
 </script>

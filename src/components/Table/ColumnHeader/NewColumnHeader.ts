@@ -4,7 +4,7 @@ const NewColumnHeader = (
     <img ${src ? `src="${src}"` : ''} alt="" class="edition-cover-image" />
     <input
         class="edition-cover-selector"
-        oninput="selectCover(this)"
+        data-edition-cover-selector
         type="file"
         accept="image/*"
     />
