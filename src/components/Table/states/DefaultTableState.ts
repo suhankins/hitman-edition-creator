@@ -137,7 +137,7 @@ const DEFAULT_STATE: ITableState = {
             ownership: [false, false, false, false, true],
         },
         {
-            name: '2 Specal Assigment Packs',
+            name: '2 Special Assignment Packs',
             ownership: [false, false, false, false, true],
         },
         {
