@@ -16,13 +16,13 @@ import ActionButton from './ActionButton.astro';
 
     [data-download-as-png]:hover::before,
     [data-download-as-png]:focus::before,
-    [data-download-as-png][aria-pressed="true"]::before {
+    [data-download-as-png][aria-pressed='true']::before {
         background-image: url('/download-hover.svg');
     }
 
     [data-copy-to-clipboard]:hover::before,
     [data-copy-to-clipboard]:focus::before,
-    [data-copy-to-clipboard][aria-pressed="true"]::before {
+    [data-copy-to-clipboard][aria-pressed='true']::before {
         background-image: url('/copy-hover.svg');
     }
 </style>
@@ -30,7 +30,7 @@ import ActionButton from './ActionButton.astro';
 <script>
     import html2canvas from '@cantoo/html2canvas';
 
-    async function convertToCanvast() {
+    async function convertToCanvas() {
         return html2canvas(
             document.querySelector('[data-edition-table]')!
                 .parentElement as HTMLElement,
@@ -39,7 +39,7 @@ import ActionButton from './ActionButton.astro';
                     element.children?.item(0)?.className ===
                         'full-cell-button' ||
                     element.children?.item(0)?.className === 'table-padding',
-                scale: window.devicePixelRatio + 1,
+                scale: window.devicePixelRatio,
             }
         );
     }
@@ -57,7 +57,7 @@ import ActionButton from './ActionButton.astro';
         ?.addEventListener('click', async (event) => {
             const target = event.target as HTMLButtonElement;
             target.disabled = true;
-            await convertToCanvast().then((canvas) => {
+            await convertToCanvas().then((canvas) => {
                 const image = canvas.toDataURL();
                 const downloadLink = document.createElement('a');
                 downloadLink.download = 'comparisonGrid.png';
@@ -67,22 +67,32 @@ import ActionButton from './ActionButton.astro';
             target.disabled = false;
         });
 
+    if (!navigator.clipboard || !ClipboardItem.supports('image/png')) {
+        document.querySelector('[data-copy-to-clipboard]')?.remove();
+    }
+
     document
         .querySelector('[data-copy-to-clipboard]')
         ?.addEventListener('click', async (event) => {
             const target = event.target as HTMLButtonElement;
             target.disabled = true;
-            await convertToCanvast().then(async (canvas) => {
+            await convertToCanvas().then(async (canvas) => {
                 const image = await canvasToBlob(canvas);
                 if (image === null) {
                     alert('Error while creating the image!');
                     return;
                 }
-                await navigator.clipboard.write([
-                    new ClipboardItem({
-                        [image.type]: image,
-                    }),
-                ]);
+                await navigator.clipboard
+                    .write([
+                        new ClipboardItem({
+                            [image.type]: image,
+                        }),
+                    ])
+                    .catch((error) => {
+                        alert(
+                            `Couldn't copy the image to clipboard! Error: ${error}`
+                        );
+                    });
             });
             target.disabled = false;
         });
