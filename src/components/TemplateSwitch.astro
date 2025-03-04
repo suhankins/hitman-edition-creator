@@ -10,14 +10,14 @@ const { selected } = Astro.props;
 
 <ActionButton
     data-default-template
-    aria-pressed={selected === 'default'}
+    aria-current={selected === 'default'}
     href="/"
 >
     Default
 </ActionButton>
 <ActionButton
     data-blank-template
-    aria-pressed={selected === 'blank'}
+    aria-current={selected === 'blank'}
     href="/blank"
 >
     Blank
@@ -34,13 +34,13 @@ const { selected } = Astro.props;
 
     [data-default-template]:hover::before,
     [data-default-template]:focus::before,
-    [data-default-template][aria-pressed='true']::before {
+    [data-default-template][aria-current='true']::before {
         background-image: url('/ioi-hover.svg');
     }
 
     [data-blank-template]:hover::before,
     [data-blank-template]:focus::before,
-    [data-blank-template][aria-pressed='true']::before {
+    [data-blank-template][aria-current='true']::before {
         background-image: url('/table-hover.svg');
     }
 </style>
