@@ -1,6 +1,7 @@
-const onClickEvent = (event: Event) => {
-    const target = event.target as HTMLElement;
-    target.ariaPressed = `${!(target.ariaPressed === 'true')}`;
+const switchCellState = (target: HTMLElement) => {
+    const newState = `${!(target.ariaPressed === 'true')}`;
+    target.ariaPressed = newState;
+    return newState;
 };
 
 const onKeyDown = (event: Event) => {
@@ -77,9 +78,47 @@ const onKeyDown = (event: Event) => {
     event.preventDefault();
 };
 
+let isMouseDown = false;
+let cellState: string = 'false';
+
+const touchAndKeyboardHandler = (event: Event) => {
+    if (!(event instanceof PointerEvent)) return;
+    if (event.pointerType === 'mouse' || event.pointerType === 'pen') {
+        return;
+    }
+    switchCellState(event.target as HTMLElement);
+};
+
+const mouseDownHandler = (event: Event) => {
+    if (!(event instanceof PointerEvent)) return;
+    if (event.pointerType !== 'mouse' && event.pointerType !== 'pen') {
+        return;
+    }
+    if (event.button !== 0) return;
+    const target = event.target as HTMLElement;
+    isMouseDown = true;
+    cellState = switchCellState(target);
+};
+
+const onPointerOver = (event: Event) => {
+    if (!isMouseDown) return;
+
+    const target = event.target as HTMLElement;
+    target.ariaPressed = cellState;
+};
+
+const onPointerUp = () => {
+    isMouseDown = false;
+};
+
 const registerCellListeners = () => {
     document.querySelectorAll('[data-cell]').forEach((cell) => {
-        cell.addEventListener('click', onClickEvent);
+        cell.addEventListener('click', touchAndKeyboardHandler);
+        cell.addEventListener('pointerdown', mouseDownHandler);
+        cell.addEventListener('pointerover', onPointerOver);
+        window.addEventListener('pointerup', onPointerUp);
+        window.addEventListener('pointercancel', onPointerUp);
+
         cell.addEventListener('keydown', onKeyDown);
     });
 };
