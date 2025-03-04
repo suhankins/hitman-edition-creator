@@ -3,7 +3,9 @@ import ActionButton from './ActionButton.astro';
 ---
 
 <ActionButton data-download-as-png> Download as PNG </ActionButton>
-<ActionButton data-copy-to-clipboard> Copy to clipboard </ActionButton>
+<ActionButton data-copy-to-clipboard>
+    Copy to clipboard
+</ActionButton>
 
 <style>
     [data-download-as-png]::before {
@@ -14,16 +16,44 @@ import ActionButton from './ActionButton.astro';
         background-image: url('/copy.svg');
     }
 
-    [data-download-as-png]:hover::before,
-    [data-download-as-png]:focus::before,
+    [data-download-as-png]:disabled:before,
+    [data-copy-to-clipboard]:disabled::before {
+        background-image: url('/loading.svg');
+    }
+
+    [data-download-as-png]:not(:disabled):hover::before,
+    [data-download-as-png]:not(:disabled):focus::before,
     [data-download-as-png][aria-pressed='true']::before {
         background-image: url('/download-hover.svg');
     }
 
-    [data-copy-to-clipboard]:hover::before,
-    [data-copy-to-clipboard]:focus::before,
+    [data-copy-to-clipboard]:not([data-copied="true"]):not(:disabled):hover::before,
+    [data-copy-to-clipboard]:not([data-copied="true"]):not(:disabled):focus::before,
     [data-copy-to-clipboard][aria-pressed='true']::before {
         background-image: url('/copy-hover.svg');
+    }
+
+    [data-copy-to-clipboard][data-copied="true"],
+    [data-copy-to-clipboard]:disabled {
+        color: transparent;
+    }
+
+    [data-copy-to-clipboard][data-copied="true"]::before {
+        background-image: url('/checkmark.svg');
+    }
+
+    [data-copy-to-clipboard]:disabled::after {
+        content: 'Loading...';
+        position: absolute;
+        color: #ffffff;
+        padding-left: calc(1.8em + 0.5ch);
+    }
+
+    [data-copy-to-clipboard][data-copied="true"]::after {
+        content: 'Copied!';
+        position: absolute;
+        color: #ffffff;
+        padding-left: calc(1.8em + 0.5ch);
     }
 </style>
 
@@ -95,5 +125,7 @@ import ActionButton from './ActionButton.astro';
                     });
             });
             target.disabled = false;
+            target.dataset.copied = "true";
+            setTimeout(() => target.dataset.copied = "false", 2000);
         });
 </script>

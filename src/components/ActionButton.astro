@@ -32,6 +32,7 @@ const { ...props } = Astro.props;
         border-radius: 0;
         background-color: #2f414588;
         text-decoration: none;
+        position: relative;
     }
 
     .action-button:disabled {
@@ -40,8 +41,8 @@ const { ...props } = Astro.props;
 
     .action-button::before {
         content: '';
-        width: 32px;
-        height: 32px;
+        width: 1.8em;
+        height: 1.8em;
         background-repeat: no-repeat;
         background-size: cover;
     }
