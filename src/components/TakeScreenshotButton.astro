@@ -9,28 +9,28 @@ import ActionButton from './ActionButton.astro';
 
 <style>
     [data-download-as-png]::before {
-        background-image: url('/download.svg');
+        background-image: url('/icons/download.svg');
     }
 
     [data-copy-to-clipboard]::before {
-        background-image: url('/copy.svg');
+        background-image: url('/icons/copy.svg');
     }
 
     [data-download-as-png]:disabled:before,
     [data-copy-to-clipboard]:disabled::before {
-        background-image: url('/loading.svg');
+        background-image: url('/icons/loading.svg');
     }
 
     [data-download-as-png]:not(:disabled):hover::before,
     [data-download-as-png]:not(:disabled):focus::before,
     [data-download-as-png][aria-pressed='true']::before {
-        background-image: url('/download-hover.svg');
+        background-image: url('/icons/download-hover.svg');
     }
 
     [data-copy-to-clipboard]:not([data-copied="true"]):not(:disabled):hover::before,
     [data-copy-to-clipboard]:not([data-copied="true"]):not(:disabled):focus::before,
     [data-copy-to-clipboard][aria-pressed='true']::before {
-        background-image: url('/copy-hover.svg');
+        background-image: url('/icons/copy-hover.svg');
     }
 
     [data-copy-to-clipboard][data-copied="true"],
@@ -39,7 +39,7 @@ import ActionButton from './ActionButton.astro';
     }
 
     [data-copy-to-clipboard][data-copied="true"]::before {
-        background-image: url('/checkmark.svg');
+        background-image: url('/icons/checkmark.svg');
     }
 
     [data-copy-to-clipboard]:disabled::after {

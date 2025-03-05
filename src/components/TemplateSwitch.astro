@@ -25,22 +25,22 @@ const { selected } = Astro.props;
 
 <style>
     [data-default-template]::before {
-        background-image: url('/ioi.svg');
+        background-image: url('/icons/ioi.svg');
     }
 
     [data-blank-template]::before {
-        background-image: url('/table.svg');
+        background-image: url('/icons/table.svg');
     }
 
     [data-default-template]:hover::before,
     [data-default-template]:focus::before,
     [data-default-template][aria-current='true']::before {
-        background-image: url('/ioi-hover.svg');
+        background-image: url('/icons/ioi-hover.svg');
     }
 
     [data-blank-template]:hover::before,
     [data-blank-template]:focus::before,
     [data-blank-template][aria-current='true']::before {
-        background-image: url('/table-hover.svg');
+        background-image: url('/icons/table-hover.svg');
     }
 </style>
