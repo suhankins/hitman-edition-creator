@@ -1,47 +1,30 @@
 ---
-import ActionButton from './ActionButton.astro';
+import ActionButton from './../ActionButton.astro';
 ---
 
-<ActionButton data-download data-download-as-png>
-    Download as PNG
-</ActionButton>
-<ActionButton data-download data-download-as-jpg>
-    Download as JPG
-</ActionButton>
 <ActionButton data-copy-to-clipboard> Copy to clipboard </ActionButton>
 
 <style>
-    [data-download]::before {
-        background-image: url('/icons/download.svg');
-    }
-
     [data-copy-to-clipboard]::before {
         background-image: url('/icons/copy.svg');
     }
 
-    [data-download]:disabled:before,
-    [data-copy-to-clipboard]:disabled::before {
+    [data-copy-to-clipboard][aria-busy='true']::before {
         background-image: url('/icons/loading.svg');
     }
 
-    [data-download]:not(:disabled):hover::before,
-    [data-download]:not(:disabled):focus::before,
-    [data-download][aria-pressed='true']::before {
-        background-image: url('/icons/download-hover.svg');
-    }
-
     [data-copy-to-clipboard]:not([data-copied='true']):not(
-            :disabled
+            [aria-busy='true']
         ):hover::before,
     [data-copy-to-clipboard]:not([data-copied='true']):not(
-            :disabled
+            [aria-busy='true']
         ):focus::before,
     [data-copy-to-clipboard][aria-pressed='true']::before {
         background-image: url('/icons/copy-hover.svg');
     }
 
     [data-copy-to-clipboard][data-copied='true'],
-    [data-copy-to-clipboard]:disabled {
+    [data-copy-to-clipboard][aria-busy='true'] {
         color: transparent;
     }
 
@@ -49,7 +32,7 @@ import ActionButton from './ActionButton.astro';
         background-image: url('/icons/checkmark.svg');
     }
 
-    [data-copy-to-clipboard]:disabled::after {
+    [data-copy-to-clipboard][aria-busy='true']::after {
         content: 'Loading...';
         position: absolute;
         color: #ffffff;
@@ -65,22 +48,7 @@ import ActionButton from './ActionButton.astro';
 </style>
 
 <script>
-    import html2canvas from '@cantoo/html2canvas';
-
-    async function convertToCanvas() {
-        return html2canvas(
-            document.querySelector('[data-edition-table]')!
-                .parentElement as HTMLElement,
-            {
-                ignoreElements: (element) =>
-                    element.children?.item(0)?.className ===
-                        'full-cell-button' ||
-                    element.children?.item(0)?.className === 'table-padding',
-                scale: Math.max(window.devicePixelRatio, 1),
-                backgroundColor: null
-            }
-        );
-    }
+    import convertToCanvas from './convertToCanvas';
 
     async function canvasToBlob(
         canvas: HTMLCanvasElement
@@ -89,34 +57,6 @@ import ActionButton from './ActionButton.astro';
             canvas.toBlob((blob) => resolve(blob));
         });
     }
-
-    const getClickDownloadHandler =
-        (type: string, extension: string) => async (event: Event) => {
-            const target = event.target as HTMLButtonElement;
-            target.disabled = true;
-            await convertToCanvas().then((canvas) => {
-                const image = canvas.toDataURL(type);
-                const downloadLink = document.createElement('a');
-                downloadLink.download = `comparisonGrid.${extension}`;
-                downloadLink.href = image;
-                downloadLink.click();
-            });
-            target.disabled = false;
-        };
-
-    document
-        .querySelector('[data-download-as-png]')
-        ?.addEventListener(
-            'click',
-            getClickDownloadHandler('image/png', 'png')
-        );
-
-    document
-        .querySelector('[data-download-as-jpg]')
-        ?.addEventListener(
-            'click',
-            getClickDownloadHandler('image/jpeg', 'jpg')
-        );
 
     if (!navigator.clipboard || !ClipboardItem.supports('image/png')) {
         document.querySelector('[data-copy-to-clipboard]')?.remove();
@@ -127,6 +67,8 @@ import ActionButton from './ActionButton.astro';
         ?.addEventListener('click', async (event) => {
             const target = event.target as HTMLButtonElement;
             target.disabled = true;
+            target.ariaBusy = 'true';
+            let success = false;
             await convertToCanvas().then(async (canvas) => {
                 const image = await canvasToBlob(canvas);
                 if (image === null) {
@@ -143,10 +85,16 @@ import ActionButton from './ActionButton.astro';
                         alert(
                             `Couldn't copy the image to clipboard! Error: ${error}`
                         );
+                    })
+                    .then(() => {
+                        success = true;
                     });
             });
             target.disabled = false;
-            target.dataset.copied = 'true';
-            setTimeout(() => (target.dataset.copied = 'false'), 2000);
+            target.ariaBusy = 'false';
+            if (success) {
+                target.dataset.copied = 'true';
+                setTimeout(() => (target.dataset.copied = 'false'), 2000);
+            }
         });
 </script>

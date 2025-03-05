@@ -1,0 +1,58 @@
+---
+import ActionButton from './../ActionButton.astro';
+
+interface Props {
+    type: string;
+    extension: string;
+}
+const { type, extension } = Astro.props;
+---
+
+<ActionButton data-download data-type={type} data-extension={extension}>
+    Download as {extension.toUpperCase()}
+</ActionButton>
+
+<script>
+    import convertToCanvas from './convertToCanvas';
+
+    const clickDownloadHandler = async (event: Event) => {
+        const target = event.target as HTMLButtonElement;
+        const type = target.dataset.type;
+        const extension = target.dataset.extension;
+        target.disabled = true;
+        target.ariaBusy = 'true';
+        await convertToCanvas()
+            .then((canvas) => {
+                const image = canvas.toDataURL(type);
+                const downloadLink = document.createElement('a');
+                downloadLink.download = `comparisonGrid.${extension}`;
+                downloadLink.href = image;
+                downloadLink.click();
+            })
+            .catch((error) =>
+                alert(`Error while exporting your image! Error: ${error}`)
+            );
+        target.ariaBusy = 'false';
+        target.disabled = false;
+    };
+
+    document.querySelectorAll('[data-download]').forEach((element) => {
+        element.addEventListener('click', clickDownloadHandler);
+    });
+</script>
+
+<style>
+    [data-download]::before {
+        background-image: url('/icons/download.svg');
+    }
+
+    [data-download][aria-busy='true']:before {
+        background-image: url('/icons/loading.svg');
+    }
+
+    [data-download]:not([aria-busy='true']):hover::before,
+    [data-download]:not([aria-busy='true']):focus::before,
+    [data-download][aria-pressed='true']::before {
+        background-image: url('/icons/download-hover.svg');
+    }
+</style>
