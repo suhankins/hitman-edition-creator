@@ -4,10 +4,6 @@ const onClickEvent = (event: Event) => {
     const parsedTableColumn = parseInt(tableColumn);
     document.querySelectorAll(`[data-table-column]`).forEach((element) => {
         if (!(element instanceof HTMLElement)) {
-            console.log(
-                'this doesnt make any sense and i hate my life',
-                element
-            );
             return;
         }
         if (element.dataset.tableColumn === tableColumn) {

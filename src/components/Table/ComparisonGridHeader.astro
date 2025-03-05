@@ -13,7 +13,6 @@
         .querySelector('[data-logo]')
         ?.addEventListener('click', (event) => {
             const target = event.target as HTMLImageElement;
-            console.log('click?', target.src);
             target.src = target.src.endsWith('/logo.png')
                 ? '/logo_men.png'
                 : '/logo.png';
