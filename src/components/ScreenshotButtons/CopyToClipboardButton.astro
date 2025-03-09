@@ -81,13 +81,13 @@ import ActionButton from './../ActionButton.astro';
                             [image.type]: image,
                         }),
                     ])
+                    .then(() => {
+                        success = true;
+                    })
                     .catch((error) => {
                         alert(
                             `Couldn't copy the image to clipboard! Error: ${error}`
                         );
-                    })
-                    .then(() => {
-                        success = true;
                     });
             });
             target.disabled = false;
