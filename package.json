@@ -11,6 +11,6 @@
   },
   "dependencies": {
     "@cantoo/html2canvas": "^1.5.9",
-    "astro": "^5.4.1"
+    "astro": "^5.16.3"
   }
 }
